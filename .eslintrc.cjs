@@ -48,6 +48,9 @@ module.exports = {
           typescript: {},
         },
       },
+      rules: {
+        "react/prop-types": "off", // Desativa a regra de validação de propTypes
+      },
     },
 
     // Typescript
