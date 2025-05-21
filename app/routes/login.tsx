@@ -48,21 +48,25 @@ export default function Login() {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Lado esquerdo - Banner */}
-      <div className="hidden md:flex md:w-1/2 bg-primary items-center justify-center p-12">
-        <div className="max-w-md flex flex-col items-center text-center">
+      <div
+        className="hidden md:flex md:w-1/2 bg-primary items-center justify-center p-12"
+        style={{
+          backgroundImage: "url('/assets/images/art.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
+      >
+        <div className="max-w-md flex flex-col items-center text-center bg-black/40 p-8 rounded-lg">
           <Logo />
           <h2 className="text-3xl font-poppins font-bold mt-8 text-white">
-            Controle Financeiro Inteligente
+            Sistema Administrativo
           </h2>
           <p className="mt-4 text-light/80 font-inter">
-            Categorize suas transações, acompanhe seus gastos e receba insights personalizados para melhorar sua saúde financeira.
+            Acesse e gerencie as informações internas com segurança e eficiência.
           </p>
-          <div className="mt-10 bg-white/10 p-6 rounded-lg">
-            <p className="text-white font-medium font-poppins">&quot;Economizei mais de 30% nas minhas despesas mensais depois que comecei a usar este aplicativo.&quot;</p>
-            <p className="mt-2 text-light/70 text-sm">Carlos Santos, usuário desde 2023</p>
-          </div>
         </div>
       </div>
+
 
       {/* Lado direito - Formulário de login */}
       <div className="flex-1 flex items-center justify-center p-6 md:p-12 bg-light">
@@ -72,10 +76,10 @@ export default function Login() {
               <Logo small />
             </div>
             <h1 className="text-2xl md:text-3xl font-bold font-poppins text-dark">
-              Acesse sua conta
+              Acesse o BackOffice
             </h1>
             <p className="mt-2 text-gray-600 font-inter">
-              Entre para gerenciar suas finanças e acompanhar seus progressos
+              Faça login para administrar conteúdos e dados internos.
             </p>
           </div>
 
@@ -88,7 +92,7 @@ export default function Login() {
           <Form method="post" className="space-y-6">
             <InputField
               id="email"
-              label="Email"
+              label="Email Corporativo"
               type="email"
               name="email"
               placeholder="seu@email.com"
@@ -118,17 +122,8 @@ export default function Login() {
                   htmlFor="remember-me"
                   className="ml-2 block text-sm text-gray-700 font-inter"
                 >
-                  Lembrar-me
+                  Manter minha sessão ativa
                 </label>
-              </div>
-
-              <div className="text-sm">
-                <a
-                  href="/recuperar-senha"
-                  className="font-medium text-secondary hover:text-primary transition-colors"
-                >
-                  Esqueceu a senha?
-                </a>
               </div>
             </div>
 
@@ -137,21 +132,21 @@ export default function Login() {
 
           <div className="mt-8 text-center text-sm text-gray-600 font-inter">
             <p>
-              Não tem uma conta?{" "}
+              Esqueceu sua senha?{" "}
               <a
-                href="/cadastro"
+                href="/recuperar-senha"
                 className="font-medium text-secondary hover:text-primary transition-colors"
               >
-                Cadastre-se agora
+                Recuperar acesso
               </a>
             </p>
             <p className="mt-2">
-              Precisa de ajuda?{" "}
+              Problemas no acesso?{" "}
               <a
                 href="/suporte"
                 className="font-medium text-secondary hover:text-primary transition-colors"
               >
-                Contate o suporte
+                Contate o suporte técnico
               </a>
             </p>
           </div>
