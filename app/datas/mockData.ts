@@ -191,3 +191,122 @@ export const detailedReceipts: Transaction[] = [
 export const incomeSourceData: TransactionCategoryData[] = calculateTransactionCategories(
   detailedReceipts.filter(t => t.type === 'income')
 );
+
+// New mock data for detailed expenses
+export const detailedExpenses: Transaction[] = [
+  {
+    id: 201,
+    description: 'Aluguel Apartamento - Junho',
+    category: 'Moradia',
+    amount: -350000,
+    date: '01/06/2025',
+    type: 'expense',
+    source: 'Conta Bancária',
+    paymentMethod: 'Transferência Bancária',
+    status: 'Pendente'
+  },
+  {
+    id: 202,
+    description: 'Supermercado - Pingo Doce',
+    category: 'Alimentação',
+    amount: -85500,
+    date: '20/05/2025',
+    type: 'expense',
+    source: 'Cartão de Débito',
+    paymentMethod: 'Cartão de Débito',
+    status: 'Concluído'
+  },
+  {
+    id: 203,
+    description: 'Conta de Eletricidade - Maio',
+    category: 'Contas de Casa',
+    amount: -25000,
+    date: '15/05/2025',
+    type: 'expense',
+    source: 'Débito Direto',
+    paymentMethod: 'Débito Direto',
+    status: 'Concluído'
+  },
+  {
+    id: 204,
+    description: 'Internet e TV - MEO',
+    category: 'Contas de Casa',
+    amount: -18000,
+    date: '10/05/2025',
+    type: 'expense',
+    source: 'Débito Direto',
+    paymentMethod: 'Débito Direto',
+    status: 'Concluído'
+  },
+  {
+    id: 205,
+    description: 'Gasolina - Posto BP',
+    category: 'Transporte',
+    amount: -12000,
+    date: '08/05/2025',
+    type: 'expense',
+    source: 'Cartão de Crédito',
+    paymentMethod: 'Cartão de Crédito',
+    status: 'Concluído'
+  },
+  {
+    id: 206,
+    description: 'Consulta Médica - Dr. Silva',
+    category: 'Saúde',
+    amount: -40000,
+    date: '05/05/2025',
+    type: 'expense',
+    source: 'Dinheiro',
+    paymentMethod: 'Dinheiro',
+    status: 'Concluído'
+  },
+  {
+    id: 207,
+    description: 'Jantar Fora - Restaurante X',
+    category: 'Lazer',
+    amount: -28000,
+    date: '03/05/2025',
+    type: 'expense',
+    source: 'Cartão de Débito',
+    paymentMethod: 'Cartão de Débito',
+    status: 'Concluído'
+  },
+  {
+    id: 208,
+    description: 'Mensalidade Ginásio',
+    category: 'Lazer',
+    amount: -15000,
+    date: '01/05/2025',
+    type: 'expense',
+    source: 'Débito Direto',
+    paymentMethod: 'Débito Direto',
+    status: 'Concluído'
+  },
+  {
+    id: 209,
+    description: 'Reparação Automóvel',
+    category: 'Transporte',
+    amount: -75000,
+    date: '25/04/2025',
+    type: 'expense',
+    source: 'Cartão de Crédito',
+    paymentMethod: 'Cartão de Crédito',
+    status: 'Concluído'
+  },
+  {
+    id: 210,
+    description: 'Assinatura Streaming - Netflix',
+    category: 'Entretenimento',
+    amount: -8000,
+    date: '22/04/2025',
+    type: 'expense',
+    source: 'Cartão de Crédito',
+    paymentMethod: 'Cartão de Crédito',
+    status: 'Concluído'
+  },
+];
+
+// Calculate expense category distribution for the pie chart
+export const expenseCategoryData: TransactionCategoryData[] = calculateTransactionCategories(
+  detailedExpenses.filter(t => t.type === 'expense')
+);
