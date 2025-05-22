@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { DashboardLayoutProps, MenuItem } from '~/types/types';
 import { SidebarLink } from './SidebarLink';
+import { logoutUser } from '~/hook/authMock'; // Importar a função de logout
 
 export function AdminLayout({ children }: DashboardLayoutProps) {
   const location = useLocation();
@@ -70,6 +71,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       icon: LifeBuoy,
       label: 'Gerenciamento de Tickets'
     },
+
     // The 'Configurações' (Settings) menu item has been removed as requested.
   ];
 
@@ -137,13 +139,13 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
 
           {/* Logout Button */}
           <div className="p-4 border-t border-gray-200">
-            <Link
-              to="/logout"
-              className="flex items-center px-4 py-3 text-red-600 rounded-lg hover:bg-red-50 transition-colors duration-200"
+            <button // Changed from Link to button
+              onClick={logoutUser} // Call the logout function
+              className="flex items-center px-4 py-3 text-red-600 rounded-lg hover:bg-red-50 transition-colors duration-200 w-full text-left"
             >
               <LogOut size={20} />
               <span className="ml-3 font-medium text-base">Encerrar Sessão</span> {/* Adjusted font size */}
-            </Link>
+            </button>
           </div>
         </div>
       </aside>
@@ -170,6 +172,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                 {location.pathname === '/dashboard/security' && 'Painel de Segurança'}
                 {location.pathname === '/dashboard/access-management' && 'Gerenciamento de Acesso'}
                 {location.pathname === '/dashboard/tickets' && 'Gerenciamento de Tickets'}
+                {location.pathname === '/dashboard/profile' && 'Meu Perfil'} {/* Novo título */}
               </h1>
             </div>
 
@@ -203,9 +206,9 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                     </Link>
                     {/* Removed link to /admin/configuracoes from user menu */}
                     <div className="border-t border-gray-200 my-1"></div>
-                    <Link to="/logout" className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                    <button onClick={logoutUser} className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 w-full text-left">
                       Encerrar Sessão
-                    </Link>
+                    </button>
                   </div>
                 )}
               </div>

@@ -131,7 +131,7 @@ export interface ReceiptItemProps {
 // Auth types (mantidos do contexto anterior)
 export interface AuthError {
   error?: string;
-  success?: boolean;
+  success?: boolean; // Mantido para compatibilidade, embora o redirecionamento seja o foco
 }
 
 export interface LoginFormData {

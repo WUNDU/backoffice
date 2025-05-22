@@ -1,7 +1,8 @@
 // RemixMocksProvider.tsx
 import React, { useState, useEffect, createContext } from "react";
 import { AuthError } from "~/types/auth";
-// Importa AuthError
+import { checkAuthCookie } from "./authMock";
+
 
 // Contexto para o mock useActionData
 export const ActionDataContext = createContext<{
@@ -24,12 +25,28 @@ export const NavigationContext = createContext<{
   setFormData: () => { },
 });
 
+// Novo Contexto para o status de autenticação
+export const AuthContext = createContext<{
+  isAuthenticated: boolean;
+  setIsAuthenticated: (status: boolean) => void;
+}>({
+  isAuthenticated: false,
+  setIsAuthenticated: () => { },
+});
+
+
 // Provedor para os mocks garantindo que compartilham o estado
 export const RemixMocksProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [actionData, setActionData] = useState<AuthError | undefined>(undefined);
   const [navigationState, setNavigationState] = useState<"idle" | "submitting" | "loading">("idle");
   const [navigationFormMethod] = useState<string | undefined>(undefined);
   const [navigationFormData, setNavigationFormData] = useState<FormData | undefined>(undefined);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Novo estado de autenticação
+
+  // Verifica o status de autenticação ao carregar o provedor
+  useEffect(() => {
+    setIsAuthenticated(checkAuthCookie());
+  }, []);
 
   // Este useEffect no mock não é estritamente necessário se o componente Form
   // redefinir corretamente o estado, mas pode atuar como um fallback.
@@ -56,7 +73,9 @@ export const RemixMocksProvider: React.FC<{ children: React.ReactNode }> = ({ ch
           setFormData: setNavigationFormData,
         }}
       >
-        {children}
+        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+          {children}
+        </AuthContext.Provider>
       </NavigationContext.Provider>
     </ActionDataContext.Provider>
   );

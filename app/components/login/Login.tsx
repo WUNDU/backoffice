@@ -1,30 +1,38 @@
-// Login.tsx
+// LoginScreen.tsx
 import { useState, useEffect } from "react";
-import { Form } from "~/components/login/Form";
-import { InputField } from "~/components/login/InputField";
-import { LoginButton } from "~/components/login/LoginButton";
-import { Logo } from "~/components/login/Logo";
-import { useActionData, useNavigation } from "~/hook/authMock";
-// Importa Logo
-// Importa mocks de AuthMocks
-import { AuthError } from "~/types/auth.js";
-// Importa AuthError
+import { Form, useActionData, useAuth, useNavigation } from "~/hook/authMock";
+import { AuthError } from "~/types/types";
+import { Logo } from "./Logo";
+import { InputField } from "./InputField";
+import { LoginButton } from "./LoginButton";
 
-export default function Login() {
+
+export default function LoginScreen() {
   const { data: actionData } = useActionData<AuthError>();
   const navigation = useNavigation();
+  const { isAuthenticated } = useAuth(); // Obter o status de autenticação
   const isSubmitting = navigation.state === "submitting";
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<string | undefined>(undefined);
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
   const [globalError, setGlobalError] = useState<string | undefined>(undefined);
 
+  // Efeito para redirecionar se já estiver autenticado
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("Usuário já autenticado, redirecionando para o dashboard.");
+      window.location.href = '/dashboard'; // Redireciona para o dashboard
+    }
+  }, [isAuthenticated]);
+
   // Efeito para lidar com erros retornados pela action
   useEffect(() => {
-    // console.log("Login Component: actionData changed:", actionData); // Removido para segurança
+    setGlobalError(undefined);
+    setEmailError(undefined);
+    setPasswordError(undefined);
+
     if (actionData?.error) {
       setGlobalError(actionData.error);
-      // Lógica para identificar qual campo está errado
       if (actionData.error.toLowerCase().includes("email") || actionData.error.toLowerCase().includes("credenciais")) {
         setEmailError("Email ou senha inválidos.");
         setPasswordError("Email ou senha inválidos.");
@@ -34,13 +42,6 @@ export default function Login() {
         setEmailError(undefined);
         setPasswordError(undefined);
       }
-      // O setTimeout foi removido para que o erro permaneça visível
-      // const timer = setTimeout(() => setGlobalError(undefined), 3000);
-      // return () => clearTimeout(timer);
-    } else {
-      setEmailError(undefined);
-      setPasswordError(undefined);
-      setGlobalError(undefined);
     }
   }, [actionData]);
 
@@ -80,10 +81,11 @@ export default function Login() {
             </p>
           </div>
 
+          {/* Mensagem de erro global */}
           {globalError && (
-            <div className={`mb-6 p-4 bg-tertiary/10 border-l-4 border-tertiary text-tertiary rounded-md animate-fade-in-down transition-all duration-500 ease-out ${globalError ? 'animate-shake' : ''}`}>
+            <div className={`mb-6 p-4 bg-tertiary text-white rounded-lg shadow-xl animate-fade-in-down animate-shake`}>
               <div className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-tertiary mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
                 <p className="font-medium">{globalError}</p>
