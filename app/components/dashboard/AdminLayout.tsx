@@ -50,7 +50,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       ]
     },
     {
-      to: '/dashboard/relatorios',
+      to: '/dashboard/reports',
       icon: BarChart3,
       label: 'Relatórios e Análises'
     },

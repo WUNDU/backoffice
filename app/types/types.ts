@@ -56,6 +56,7 @@ export interface ChartData {
   receita?: number;
   despesa?: number;
   users?: number;
+  net?: number; // Added for net balance in reports
 }
 
 // New type for Pie Chart data
@@ -68,6 +69,14 @@ export interface TransactionCategoryData {
   name: string;
   value: number;
   color: string; // Color for the segment in the pie chart
+}
+
+// New type for Bar Chart data
+export interface BarChartCardProps {
+  title: string;
+  chartData: { name: string; value: number; color?: string }[];
+  dataKey: string;
+  barColor: string;
 }
 
 export interface BillItemProps {
@@ -116,4 +125,3 @@ export interface Transaction {
 export interface ReceiptItemProps {
   receipt: Transaction; // Reusing Transaction type for receipts, but focusing on income
 }
-
