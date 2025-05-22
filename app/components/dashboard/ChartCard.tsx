@@ -14,13 +14,30 @@ export const ChartCard: React.FC<ChartCardProps> = ({ title, chartData, dataKey,
       </div>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData}>
+          <LineChart
+            data={chartData}
+            margin={{ top: 5, right: 30, left: 40, bottom: 5 }} // Increased left margin for Y-axis labels
+          >
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
-            <XAxis dataKey="month" axisLine={false} tickLine={false} />
+            <XAxis
+              dataKey="month"
+              axisLine={false}
+              tickLine={false}
+              style={{ fontSize: '14px' }} // Set font size for X-axis ticks for consistency
+            />
             <YAxis
               axisLine={false}
               tickLine={false}
-              tickFormatter={(value: number) => `${Math.floor(value / 1000)}K Kz`}
+              // Adjusted tickFormatter for better readability with large numbers
+              tickFormatter={(value: number) => {
+                if (value >= 1000000) {
+                  return `${(value / 1000000).toFixed(1)}M Kz`; // For millions
+                } else if (value >= 1000) {
+                  return `${(value / 1000).toFixed(0)}K Kz`; // For thousands
+                }
+                return `${value} Kz`; // For smaller values
+              }}
+              style={{ fontSize: '14px' }} // Increased font size for Y-axis ticks
             />
             <Tooltip
               formatter={(value: number) => [`${new Intl.NumberFormat('pt-AO', { style: 'currency', currency: 'AOA' }).format(value)}`, title]}

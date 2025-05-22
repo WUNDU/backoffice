@@ -1,4 +1,4 @@
-import { Bill, Budget, ChartData, Transaction, TransactionCategoryData} from "~/types/types";
+import { Bill, Budget, ChartData, Transaction, TransactionCategoryData } from "~/types/types";
 
 export const balanceData: ChartData[] = [
   { month: 'Jan', saldo: 400000 },
@@ -93,3 +93,101 @@ const calculateTransactionCategories = (transactions: Transaction[]): Transactio
 };
 
 export const transactionCategoriesData: TransactionCategoryData[] = calculateTransactionCategories(recentTransactions);
+
+
+// New mock data for detailed receipts
+export const detailedReceipts: Transaction[] = [
+  {
+    id: 101,
+    description: 'Salário Mensal - Maio',
+    category: 'Salário',
+    amount: 1500000,
+    date: '05/05/2025',
+    type: 'income',
+    source: 'Emprego Principal',
+    paymentMethod: 'Transferência Bancária',
+    status: 'Concluído'
+  },
+  {
+    id: 102,
+    description: 'Pagamento Projeto Web - Cliente A',
+    category: 'Serviços',
+    amount: 750000,
+    date: '28/04/2025',
+    type: 'income',
+    source: 'Freelance',
+    paymentMethod: 'Transferência Bancária',
+    status: 'Concluído'
+  },
+  {
+    id: 103,
+    description: 'Reembolso Despesas Viagem',
+    category: 'Reembolso',
+    amount: 120000,
+    date: '20/04/2025',
+    type: 'income',
+    source: 'Empresa',
+    paymentMethod: 'Dinheiro',
+    status: 'Concluído'
+  },
+  {
+    id: 104,
+    description: 'Venda de Item Usado - OLX',
+    category: 'Vendas',
+    amount: 35000,
+    date: '15/04/2025',
+    type: 'income',
+    source: 'Venda Pessoal',
+    paymentMethod: 'MBWay',
+    status: 'Concluído'
+  },
+  {
+    id: 105,
+    description: 'Dividendos de Ações',
+    category: 'Investimento',
+    amount: 250000,
+    date: '10/04/2025',
+    type: 'income',
+    source: 'Carteira de Ações',
+    paymentMethod: 'Transferência Bancária',
+    status: 'Concluído'
+  },
+  {
+    id: 106,
+    description: 'Aluguel Imóvel',
+    category: 'Aluguel',
+    amount: 400000,
+    date: '01/04/2025',
+    type: 'income',
+    source: 'Propriedade',
+    paymentMethod: 'Transferência Bancária',
+    status: 'Concluído'
+  },
+  {
+    id: 107,
+    description: 'Bónus Anual',
+    category: 'Salário',
+    amount: 500000,
+    date: '20/03/2025',
+    type: 'income',
+    source: 'Emprego Principal',
+    paymentMethod: 'Transferência Bancária',
+    status: 'Concluído'
+  },
+  {
+    id: 108,
+    description: 'Pagamento Projeto Gráfico - Cliente B',
+    category: 'Serviços',
+    amount: 300000,
+    date: '15/03/2025',
+    type: 'income',
+    source: 'Freelance',
+    paymentMethod: 'Transferência Bancária',
+    status: 'Pendente'
+  },
+];
+
+// Calculate income source distribution for the pie chart
+export const incomeSourceData: TransactionCategoryData[] = calculateTransactionCategories(
+  detailedReceipts.filter(t => t.type === 'income')
+);

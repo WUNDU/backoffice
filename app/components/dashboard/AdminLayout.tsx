@@ -43,9 +43,9 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       label: 'Gestão Financeira',
       submenuKey: 'finance',
       submenuItems: [
-        { to: '/dashboard/transaction', label: 'Transações', isActive: location.pathname === '/dashboard/financas/transacoes' },
-        { to: '/dashboard/financas/receitas', label: 'Receitas', isActive: location.pathname === '/dashboard/financas/receitas' },
-        { to: '/dashboard/financas/despesas', label: 'Despesas', isActive: location.pathname === '/dashboard/financas/despesas' },
+        { to: '/dashboard/transaction', label: 'Transações', isActive: location.pathname === '/dashboard/transaction' },
+        { to: '/dashboard/receipt', label: 'Receitas', isActive: location.pathname === '/dashboard/receipt' },
+        { to: '/dashboard/expense', label: 'Despesas', isActive: location.pathname === '/dashboard/expense' },
         // Added linking to bank/card as a conceptual sub-feature under settings/integrations
       ]
     },

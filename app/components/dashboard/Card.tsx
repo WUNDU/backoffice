@@ -58,7 +58,7 @@ export const Card: React.FC<CardProps> = ({
   }, [value, title]);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md animate-fadeInUp">
+    <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md animate-fadeInUp"> {/* Reduced padding from p-6 to p-4 */}
       <div className="flex justify-between items-start mb-4">
         <div className={`p-2 rounded-lg ${color === 'primary' ? 'bg-primary/10 text-primary' :
           color === 'secondary' ? 'bg-secondary/10 text-secondary' :
@@ -69,13 +69,14 @@ export const Card: React.FC<CardProps> = ({
         </div>
         {trend && percentage !== undefined && (
           <div className={`flex items-center text-xs font-medium ${percentage > 0 ? 'text-green-600' : 'text-red-600'}`}>
-            {percentage > 0 ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
+            {percentage > 0 ? <ArrowUpRight size={16} /> : <ArrowDownRight size={15} />}
             <span>{Math.abs(percentage)}%</span>
           </div>
         )}
       </div>
       <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-      <p className={`text-2xl font-bold mt-1 text-dark transition-all duration-300 ${isAnimating ? 'text-primary' : ''}`}>
+      {/* Further adjusted font size for responsiveness to ensure numbers appear well on all screens */}
+      <p className={`text-base sm:text-lg md:text-xl font-bold mt-1 text-dark transition-all duration-300 ${isAnimating ? 'text-primary' : ''}`}>
         {isCurrency
           ? new Intl.NumberFormat('pt-AO', { style: 'currency', currency: 'AOA' }).format(displayedValue)
           : displayedValue.toLocaleString()}

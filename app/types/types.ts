@@ -106,4 +106,14 @@ export interface Transaction {
   amount: number;
   date: string;
   type: 'income' | 'expense' | 'transfer';
+  // Added optional fields for more detailed receipts
+  source?: string; // e.g., "Salário", "Freelance", "Investimento"
+  paymentMethod?: string; // e.g., "Transferência Bancária", "Dinheiro", "Cartão"
+  status?: 'Pendente' | 'Concluído' | 'Cancelado';
 }
+
+// New interface for ReceiptItemProps
+export interface ReceiptItemProps {
+  receipt: Transaction; // Reusing Transaction type for receipts, but focusing on income
+}
+
