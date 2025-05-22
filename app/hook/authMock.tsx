@@ -1,9 +1,8 @@
 // AuthMocks.tsx
 import React, { useContext } from "react";
 // Importa tipos
-// Importa contextos
-import { AuthError, User } from "~/types/types.js";
 import { ActionDataContext, AuthContext, NavigationContext } from "./remixMocksProvider";
+import { AuthError, User } from "~/types/types";
 
 // Chave para o localStorage
 const AUTH_TOKEN_KEY = 'auth_token';

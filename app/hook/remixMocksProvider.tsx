@@ -1,8 +1,7 @@
 // RemixMocksProvider.tsx
 import React, { useState, useEffect, createContext } from "react";
-import { AuthError } from "~/types/auth";
+import { AuthError } from "~/types/types";
 import { checkAuthCookie } from "./authMock";
-
 
 // Contexto para o mock useActionData
 export const ActionDataContext = createContext<{
@@ -30,8 +29,8 @@ export const AuthContext = createContext<{
   isAuthenticated: boolean;
   setIsAuthenticated: (status: boolean) => void;
 }>({
-  isAuthenticated: false,
-  setIsAuthenticated: () => { },
+  isAuthenticated: false, // Valor inicial
+  setIsAuthenticated: () => { }, // Função vazia para o valor inicial
 });
 
 
@@ -46,7 +45,7 @@ export const RemixMocksProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   // Verifica o status de autenticação ao carregar o provedor
   useEffect(() => {
     setIsAuthenticated(checkAuthCookie());
-  }, []);
+  }, []); // Executa apenas uma vez ao montar
 
   // Este useEffect no mock não é estritamente necessário se o componente Form
   // redefinir corretamente o estado, mas pode atuar como um fallback.
