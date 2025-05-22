@@ -12,7 +12,8 @@ import {
   ChevronDown,
   DollarSign,
   ShieldAlert,
-  Users as UsersIcon // Renomeado para evitar conflito com o componente Users
+  Users as UsersIcon, // Renomeado para evitar conflito com o componente Users
+  LifeBuoy // Importar o ícone LifeBuoy para Gerenciamento de Tickets
 } from 'lucide-react';
 import { DashboardLayoutProps, MenuItem } from '~/types/types';
 import { SidebarLink } from './SidebarLink';
@@ -59,9 +60,14 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       label: 'Painel de Segurança'
     },
     {
-      to: '/dashboard/access-management', // Nova rota para Gerenciamento de Acesso
-      icon: UsersIcon, // Ícone para Gerenciamento de Acesso
+      to: '/dashboard/access-management',
+      icon: UsersIcon,
       label: 'Gerenciamento de Acesso'
+    },
+    {
+      to: '/dashboard/tickets', // Nova rota para Gerenciamento de Tickets
+      icon: LifeBuoy, // Ícone para Gerenciamento de Tickets
+      label: 'Gerenciamento de Tickets'
     },
     // The 'Configurações' (Settings) menu item has been removed as requested.
   ];
@@ -161,7 +167,8 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                 {location.pathname.startsWith('/dashboard/expense') && 'Gestão Financeira - Despesas'}
                 {location.pathname === '/dashboard/reports' && 'Relatórios e Análises'}
                 {location.pathname === '/dashboard/security' && 'Painel de Segurança'}
-                {location.pathname === '/dashboard/access-management' && 'Gerenciamento de Acesso'} {/* Novo título */}
+                {location.pathname === '/dashboard/access-management' && 'Gerenciamento de Acesso'}
+                {location.pathname === '/dashboard/tickets' && 'Gerenciamento de Tickets'} {/* Novo título */}
               </h1>
             </div>
 
