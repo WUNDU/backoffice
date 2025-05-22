@@ -12,13 +12,15 @@ import {
   MapPin
 } from 'lucide-react';
 import { Link } from '@remix-run/react';
-import { AdminLayout } from '~/components/dashboard/AdminLayout'; // Assumindo que este caminho está correto
-import { Card } from '~/components/dashboard/Card'; // Assumindo que este caminho está correto
-import { ChartCard } from '~/components/dashboard/ChartCard'; // Assumindo que este caminho está correto
-import { TransactionItem } from '~/components/dashboard/TransactionItem'; // Assumindo que este caminho está correto
+import { AdminLayout } from '~/components/dashboard/AdminLayout';
+import { Card } from '~/components/dashboard/Card';
+import { ChartCard } from '~/components/dashboard/ChartCard';
+import { TransactionItem } from '~/components/dashboard/TransactionItem';
 
-import { expenseData, incomeData, recentTransactions } from '~/datas/mockData'; // Assumindo que este caminho está correto
+import { expenseData, incomeData, recentTransactions } from '~/datas/mockData';
 import { geoDistributionData, kpiData, userGrowthData } from '~/types/kpi';
+// CORRIGIDO: Importação dos dados de KPI do local correto (assumindo ~/datas/kpi.ts)
+
 
 
 // New component to handle individual geographical distribution bars with animation
@@ -281,7 +283,7 @@ export default function AdminDashboard() {
                 <button className="p-1 text-gray-500 hover:text-gray-700 transition-colors duration-200">
                   <Filter size={16} />
                 </button>
-                <Link to="/admin/transacoes" className="flex items-center text-secondary text-sm hover:text-primary transition-colors duration-200">
+                <Link to="/dashboard/transaction" className="flex items-center text-secondary text-sm hover:text-primary transition-colors duration-200">
                   Ver todas
                   <ChevronRight size={16} className="ml-1" />
                 </Link>

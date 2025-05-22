@@ -1,29 +1,36 @@
 // LoginScreen.tsx
-import { useState, useEffect } from "react";
+
+import { useEffect, useState } from "react";
+import { InputField } from "~/components/login/InputField";
+import { LoginButton } from "~/components/login/LoginButton";
+import { Logo } from "~/components/login/Logo";
 import { Form, useActionData, useAuth, useNavigation } from "~/hook/authMock";
 import { AuthError } from "~/types/types";
-import { Logo } from "../components/login/Logo";
-import { InputField } from "../components/login/InputField";
-import { LoginButton } from "../components/login/LoginButton";
 
+// Importar useNavigate não é mais necessário para redirecionamento direto aqui
+// import { useNavigate } from "@remix-run/react";
 
 export default function LoginScreen() {
   const { data: actionData } = useActionData<AuthError>();
   const navigation = useNavigation();
-  const { isAuthenticated } = useAuth(); // Obter o status de autenticação
+  useAuth(); // Obter o status de autenticação
+  // const navigate = useNavigate(); // Não é mais necessário para redirecionamento direto aqui
   const isSubmitting = navigation.state === "submitting";
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<string | undefined>(undefined);
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
   const [globalError, setGlobalError] = useState<string | undefined>(undefined);
 
-  // Efeito para redirecionar se já estiver autenticado
+  // REMOVIDO: O useEffect que fazia o redirecionamento para o dashboard
+  // se o usuário já estivesse autenticado. Esta lógica será centralizada no root.tsx.
+  /*
   useEffect(() => {
     if (isAuthenticated) {
-      console.log("Usuário já autenticado, redirecionando para o dashboard.");
-      window.location.href = '/dashboard'; // Redireciona para o dashboard
+      console.log("LoginScreen: User already authenticated, navigating to dashboard.");
+      navigate('/dashboard');
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
+  */
 
   // Efeito para lidar com erros retornados pela action
   useEffect(() => {
