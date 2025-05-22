@@ -376,3 +376,42 @@ export const appSettings: ApplicationSettings = {
   enableBudgetingFeature: true,
   enableDebtManagementFeature: false,
 };
+
+// Dados simulados para o Painel de Segurança
+export const securityAlertsData = [
+  { id: 'alert-1', type: 'critical', message: 'Múltiplas tentativas de login falhas (IP: 192.168.1.10)', timestamp: '2025-05-22 10:30', status: 'pending' },
+  { id: 'alert-2', type: 'warning', message: 'Atividade incomum de usuário (conta: user@example.com)', timestamp: '2025-05-22 09:15', status: 'pending' },
+  { id: 'alert-3', type: 'info', message: 'Nova sessão iniciada de localização desconhecida', timestamp: '2025-05-22 08:00', status: 'resolved' },
+  { id: 'alert-4', type: 'critical', message: 'Tentativa de acesso a dados restritos (ID: 456)', timestamp: '2025-05-21 16:45', status: 'pending' },
+  { id: 'alert-5', type: 'warning', message: 'Configuração de segurança desatualizada', timestamp: '2025-05-20 11:00', status: 'resolved' },
+];
+
+export const accessLogsData = [
+  { id: 'log-1', user: 'admin@example.com', action: 'Login bem-sucedido', ip: '192.168.1.1', timestamp: '2025-05-22 10:35' },
+  { id: 'log-2', user: 'user@example.com', action: 'Tentativa de login falha', ip: '192.168.1.10', timestamp: '2025-05-22 10:30' },
+  { id: 'log-3', user: 'admin@example.com', action: 'Acesso a relatórios', ip: '192.168.1.1', timestamp: '2025-05-22 10:20' },
+  { id: 'log-4', user: 'guest@example.com', action: 'Tentativa de login falha', ip: '192.168.1.10', timestamp: '2025-05-22 10:29' },
+  { id: 'log-5', user: 'user@example.com', action: 'Atualização de perfil', ip: '192.168.1.5', timestamp: '2025-05-22 09:00' },
+];
+
+export const securityMetricsData = [
+  { name: 'Tentativas de Login', value: 1200, color: '#003cc3' }, // secondary
+  { name: 'Acessos Bloqueados', value: 85, color: '#ca6f05' }, // tertiary
+  { name: 'Incidentes Resolvidos', value: 45, color: '#00216b' }, // primary
+  { name: 'Vulnerabilidades', value: 12, color: '#ffd400' }, // accent
+];
+
+export const mockRoles = [
+  { id: 'admin', name: 'Administrador', description: 'Acesso total ao sistema.', permissions: ['all'] },
+  { id: 'manager', name: 'Gestor', description: 'Gerencia transações e relatórios.', permissions: ['transactions:read', 'transactions:write', 'reports:read'] },
+  { id: 'analyst', name: 'Analista', description: 'Apenas visualiza relatórios e dados.', permissions: ['reports:read', 'data:read'] },
+  { id: 'support', name: 'Suporte', description: 'Acessa tickets de suporte e logs.', permissions: ['support:read', 'logs:read'] },
+];
+
+export const mockUsers = [
+  { id: 'user-1', name: 'João Silva', email: 'joao.s@example.com', roleId: 'admin', status: 'active' },
+  { id: 'user-2', name: 'Maria Santos', email: 'maria.s@example.com', roleId: 'manager', status: 'active' },
+  { id: 'user-3', name: 'Pedro Costa', email: 'pedro.c@example.com', roleId: 'analyst', status: 'active' },
+  { id: 'user-4', name: 'Ana Pereira', email: 'ana.p@example.com', roleId: 'support', status: 'active' },
+  { id: 'user-5', name: 'Carlos Lima', email: 'carlos.l@example.com', roleId: 'manager', status: 'inactive' },
+];

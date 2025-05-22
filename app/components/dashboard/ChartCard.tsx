@@ -1,8 +1,10 @@
+// ChartCard.tsx
 import { ChevronDown } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { ChartCardProps } from '~/types/types';
 
-export const ChartCard: React.FC<ChartCardProps> = ({ title, chartData, dataKey, color }) => {
+
+export const ChartCard: React.FC<ChartCardProps> = ({ title, chartData, dataKey, color, isCurrencyChart = false }) => {
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md">
       <div className="flex justify-between items-center mb-6">
@@ -30,17 +32,33 @@ export const ChartCard: React.FC<ChartCardProps> = ({ title, chartData, dataKey,
               tickLine={false}
               // Adjusted tickFormatter for better readability with large numbers
               tickFormatter={(value: number) => {
-                if (value >= 1000000) {
-                  return `${(value / 1000000).toFixed(1)}M Kz`; // For millions
-                } else if (value >= 1000) {
-                  return `${(value / 1000).toFixed(0)}K Kz`; // For thousands
+                if (isCurrencyChart) {
+                  // Formatação para moeda (Kz)
+                  if (value >= 1000000) {
+                    return `${(value / 1000000).toFixed(1)}M Kz`; // Para milhões
+                  } else if (value >= 1000) {
+                    return `${(value / 1000).toFixed(0)}K Kz`; // Para milhares
+                  }
+                  return `${value} Kz`; // Para valores menores
+                } else {
+                  // Formatação sem moeda (apenas números)
+                  if (value >= 1000000) {
+                    return `${(value / 1000000).toFixed(1)}M`; // Para milhões
+                  } else if (value >= 1000) {
+                    return `${(value / 1000).toFixed(0)}K`; // Para milhares
+                  }
+                  return `${value}`; // Para valores menores
                 }
-                return `${value} Kz`; // For smaller values
               }}
               style={{ fontSize: '14px' }} // Increased font size for Y-axis ticks
             />
             <Tooltip
-              formatter={(value: number) => [`${new Intl.NumberFormat('pt-AO', { style: 'currency', currency: 'AOA' }).format(value)}`, title]}
+              formatter={(value: number) => {
+                if (isCurrencyChart) {
+                  return [`${new Intl.NumberFormat('pt-AO', { style: 'currency', currency: 'AOA' }).format(value)}`, title];
+                }
+                return [`${value.toLocaleString()}`, title]; // Apenas o número formatado
+              }}
               labelFormatter={(label: string) => `${label}/2025`}
             />
             {Array.isArray(dataKey) ? (

@@ -14,11 +14,11 @@ export const SidebarLink: React.FC<SidebarLinkProps> = ({ to, icon, label, isAct
             className={`
               flex items-center w-full px-4 py-3 rounded-lg
               transition-all duration-200 ease-in-out
-              ${isActive ? 'bg-indigo-100 text-indigo-700 shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:translate-x-1'}
-              focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50
+              ${isActive ? 'bg-secondary/10 text-secondary shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:translate-x-1'}
+              focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50
             `}
           >
-            <Icon size={20} className={`${isActive ? 'text-indigo-600' : 'text-gray-500'}`} />
+            <Icon size={20} className={`${isActive ? 'text-secondary' : 'text-gray-500'}`} />
             <span className="ml-3 font-medium">{label}</span>
             <ChevronDown size={16} className={`ml-auto transition-transform duration-200 ${isSubmenuOpen ? 'rotate-180' : ''}`} />
           </button>
@@ -38,8 +38,8 @@ export const SidebarLink: React.FC<SidebarLinkProps> = ({ to, icon, label, isAct
                 className={`
                   block px-4 py-2 rounded-lg
                   transition-all duration-200 ease-in-out
-                  ${item.isActive ? 'bg-indigo-50 text-indigo-600 shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:translate-x-1'}
-                  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50
+                  ${item.isActive ? 'bg-secondary/5 text-secondary shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:translate-x-1'}
+                  focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50
                 `}
               >
                 {item.label}
@@ -53,11 +53,11 @@ export const SidebarLink: React.FC<SidebarLinkProps> = ({ to, icon, label, isAct
           className={`
             flex items-center px-4 py-3 rounded-lg
             transition-all duration-200 ease-in-out
-            ${isActive ? 'bg-indigo-100 text-indigo-700 shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:translate-x-1'}
-            focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50
+            ${isActive ? 'bg-secondary/10 text-secondary shadow-sm' : 'text-gray-600 hover:bg-gray-100 hover:translate-x-1'}
+            focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50
           `}
         >
-          <Icon size={20} className={`${isActive ? 'text-indigo-600' : 'text-gray-500'}`} />
+          <Icon size={20} className={`${isActive ? 'text-secondary' : 'text-gray-500'}`} />
           <span className="ml-3 font-medium">{label}</span>
         </Link>
       )}

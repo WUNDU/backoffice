@@ -10,7 +10,11 @@ import {
   Bell,
   User,
   ChevronDown,
-  DollarSign
+  DollarSign,
+  ShieldAlert,
+  Users as UsersIcon,
+  LifeBuoy,
+  // Renomeado para o ícone de perfil
 } from 'lucide-react';
 import { DashboardLayoutProps, MenuItem } from '~/types/types';
 import { SidebarLink } from './SidebarLink';
@@ -50,6 +54,21 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       to: '/dashboard/reports',
       icon: BarChart3,
       label: 'Relatórios e Análises'
+    },
+    {
+      to: '/dashboard/security',
+      icon: ShieldAlert,
+      label: 'Painel de Segurança'
+    },
+    {
+      to: '/dashboard/access-management',
+      icon: UsersIcon,
+      label: 'Gerenciamento de Acesso'
+    },
+    {
+      to: '/dashboard/tickets',
+      icon: LifeBuoy,
+      label: 'Gerenciamento de Tickets'
     },
     // The 'Configurações' (Settings) menu item has been removed as requested.
   ];
@@ -107,7 +126,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                 isActive={
                   item.submenuItems
                     ? item.submenuItems.some(subItem => location.pathname.startsWith(subItem.to))
-                    : location.pathname === item.to
+                    : location.pathname === item.to || (item.to === '/dashboard' && location.pathname === '/') // Handle root dashboard route
                 }
                 isSubmenuOpen={item.submenuKey ? openSubmenus[item.submenuKey] : false}
                 toggleSubmenu={() => item.submenuKey && toggleSubmenu(item.submenuKey)}
@@ -143,10 +162,14 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
               </button>
               <h1 className="hidden md:block ml-4 text-xl font-semibold text-dark"> {/* Using dark color */}
                 {/* Dynamic title based on current path */}
-                {location.pathname === '/admin' && 'Painel Principal - Visão Geral'}
-                {location.pathname.startsWith('/admin/financas') && 'Gestão Financeira'}
-                {location.pathname === '/admin/relatorios' && 'Relatórios e Análises'}
-                {/* Removed dynamic title for 'Configurações' */}
+                {location.pathname === '/dashboard' && 'Painel Principal - Visão Geral'}
+                {location.pathname.startsWith('/dashboard/transaction') && 'Gestão Financeira - Transações'}
+                {location.pathname.startsWith('/dashboard/receipt') && 'Gestão Financeira - Receitas'}
+                {location.pathname.startsWith('/dashboard/expense') && 'Gestão Financeira - Despesas'}
+                {location.pathname === '/dashboard/reports' && 'Relatórios e Análises'}
+                {location.pathname === '/dashboard/security' && 'Painel de Segurança'}
+                {location.pathname === '/dashboard/access-management' && 'Gerenciamento de Acesso'}
+                {location.pathname === '/dashboard/tickets' && 'Gerenciamento de Tickets'}
               </h1>
             </div>
 
@@ -175,7 +198,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                 {/* Dropdown menu */}
                 {userMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 py-2 bg-white rounded-md shadow-lg z-50 border border-gray-200">
-                    <Link to="/admin/perfil" className="block px-4 py-2 text-sm text-dark hover:bg-gray-100"> {/* Using dark color */}
+                    <Link to="/dashboard/profile" className="block px-4 py-2 text-sm text-dark hover:bg-gray-100"> {/* Using dark color */}
                       Meu Perfil
                     </Link>
                     {/* Removed link to /admin/configuracoes from user menu */}

@@ -24,15 +24,12 @@ export const Form: React.FC<{
 
       if (result instanceof Response) {
         // Simular redirecionamento em caso de sucesso
-        console.log("Login bem-sucedido! Redirecionando...");
-        // window.location.href = result.headers.get("Location") || "/";
+        window.location.href = result.headers.get("Location") || "/dashboard";
       } else {
         // Definir dados de erro
         setActionData(result);
-        console.log("Erro de login:", result);
       }
     } catch (error) {
-      console.error("Form: Error during form submission:", error);
       setActionData({ error: "Erro inesperado na submissão do formulário." });
     } finally {
       setNavigationState("idle");

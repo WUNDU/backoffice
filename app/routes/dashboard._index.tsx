@@ -12,12 +12,13 @@ import {
   MapPin
 } from 'lucide-react';
 import { Link } from '@remix-run/react';
-import { AdminLayout } from '~/components/dashboard/AdminLayout';
-import { Card } from '~/components/dashboard/Card';
-import { ChartCard } from '~/components/dashboard/ChartCard';
-import { TransactionItem } from '~/components/dashboard/TransactionItem';
+import { AdminLayout } from '~/components/dashboard/AdminLayout'; // Assumindo que este caminho está correto
+import { Card } from '~/components/dashboard/Card'; // Assumindo que este caminho está correto
+import { ChartCard } from '~/components/dashboard/ChartCard'; // Assumindo que este caminho está correto
+import { TransactionItem } from '~/components/dashboard/TransactionItem'; // Assumindo que este caminho está correto
+
+import { expenseData, incomeData, recentTransactions } from '~/datas/mockData'; // Assumindo que este caminho está correto
 import { geoDistributionData, kpiData, userGrowthData } from '~/types/kpi';
-import { expenseData, incomeData, recentTransactions } from '~/datas/mockData';
 
 
 // New component to handle individual geographical distribution bars with animation
@@ -49,7 +50,6 @@ const GeoDistributionBar: React.FC<GeoDistributionBarProps> = ({ region, totalUs
       const currentWidth = Math.min(progress, 1) * targetWidth;
       setAnimatedWidth(currentWidth);
 
-  
       if (progress < 1) {
         animationFrameId = requestAnimationFrame(animateBar);
       }
@@ -133,7 +133,7 @@ export default function AdminDashboard() {
             <h3 className="font-medium text-red-700">Alertas de Segurança Ativos</h3>
             <p className="text-red-600 text-sm">
               Você tem {kpiData.securityAlerts} {kpiData.securityAlerts === 1 ? 'alerta' : 'alertas'} de segurança que {kpiData.securityAlerts === 1 ? 'requer' : 'requerem'} atenção.
-              <Link to="/admin/seguranca/alertas" className="ml-2 underline text-secondary hover:text-primary transition-colors duration-200">Verificar</Link>
+              <Link to="/dashboard/security" className="ml-2 underline text-secondary hover:text-primary transition-colors duration-200">Verificar</Link>
             </p>
           </div>
         </div>
@@ -222,6 +222,7 @@ export default function AdminDashboard() {
           chartData={userGrowthData}
           dataKey="users"
           color="#003cc3" // Using secondary color
+          isCurrencyChart={false} // Explicitamente definido como false
         />
         <ChartCard
           title="Receitas vs Despesas"
@@ -240,6 +241,7 @@ export default function AdminDashboard() {
           }
           dataKey={['receita', 'despesa']}
           color="#00216b" // Using primary color
+          isCurrencyChart={true} // Explicitamente definido como true
         />
       </div>
 
@@ -298,7 +300,7 @@ export default function AdminDashboard() {
           <div className="p-6 border-b border-gray-100">
             <div className="flex justify-between items-center">
               <h3 className="font-medium text-dark">Alertas de Segurança</h3>
-              <Link to="/admin/seguranca/alertas" className="flex items-center text-secondary text-sm hover:text-primary transition-colors duration-200">
+              <Link to="/dashboard/security" className="flex items-center text-secondary text-sm hover:text-primary transition-colors duration-200">
                 Ver todos
                 <ChevronRight size={16} className="ml-1" />
               </Link>
