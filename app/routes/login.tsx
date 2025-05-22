@@ -1,5 +1,5 @@
 // Importa o provedor de mocks
-import Login from "~/components/login/Login";
+import Login from "~/pages/Login";
 import { RemixMocksProvider } from "~/hook/remixMocksProvider";
 
 export default function LoginScreen() {

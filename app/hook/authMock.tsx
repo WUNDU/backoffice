@@ -1,9 +1,9 @@
 // AuthMocks.tsx
-import React, { useContext } from "react";
-// Importa tipos
-// Importa contextos
-import { AuthError, User } from "~/types/types.js";
+
+import { AuthError, User } from "~/types/types";
 import { ActionDataContext, AuthContext, NavigationContext } from "./remixMocksProvider";
+import { useContext } from "react";
+import { useNavigate } from "@remix-run/react";
 
 // Chave para o localStorage
 const AUTH_TOKEN_KEY = 'auth_token';
@@ -19,7 +19,7 @@ export const setAuthCookie = (userId: string, expiryMinutes: number = 60) => {
   const expiryTime = now.getTime() + expiryMinutes * 60 * 1000; // Converte minutos para milissegundos
   localStorage.setItem(AUTH_TOKEN_KEY, userId);
   localStorage.setItem(AUTH_EXPIRY_KEY, expiryTime.toString());
-  console.log(`Cookie de autenticação definido para ${userId}, válido até ${new Date(expiryTime).toLocaleString()}`);
+  console.log(`[AuthMocks] Cookie set: ${userId}, expires: ${new Date(expiryTime).toLocaleString()}`);
 };
 
 /**
@@ -28,7 +28,7 @@ export const setAuthCookie = (userId: string, expiryMinutes: number = 60) => {
 export const clearAuthCookie = () => {
   localStorage.removeItem(AUTH_TOKEN_KEY);
   localStorage.removeItem(AUTH_EXPIRY_KEY);
-  console.log("Cookie de autenticação limpo.");
+  console.log("[AuthMocks] Cookie cleared.");
 };
 
 /**
@@ -40,6 +40,7 @@ export const checkAuthCookie = (): boolean => {
   const expiry = localStorage.getItem(AUTH_EXPIRY_KEY);
 
   if (!token || !expiry) {
+    console.log("[AuthMocks] checkAuthCookie: No token or expiry found. Returning false.");
     return false;
   }
 
@@ -47,9 +48,11 @@ export const checkAuthCookie = (): boolean => {
   const now = new Date().getTime();
 
   if (now > expiryTime) {
-    clearAuthCookie(); // O token expirou, limpa-o
+    clearAuthCookie();
+    console.log("[AuthMocks] checkAuthCookie: Token expired. Cleared cookie. Returning false.");
     return false;
   }
+  console.log("[AuthMocks] checkAuthCookie: Token valid. Returning true.");
   return true;
 };
 
@@ -133,10 +136,13 @@ export async function mockAction(formData: FormData): Promise<AuthError | Respon
 
 /**
  * MOCK: Função para simular o logout.
+ * @param navigate - A função navigate do Remix para redirecionamento.
+ * @param setIsAuthenticated - A função para atualizar o estado de autenticação no contexto.
  */
-export const logoutUser = () => {
+export const logoutUser = (navigate: (path: string) => void, setIsAuthenticated: (status: boolean) => void) => {
   clearAuthCookie();
-  window.location.href = '/'; // Redireciona para a página de login após o logout
+  setIsAuthenticated(false); // Atualiza o estado de autenticação para false
+  navigate('/login'); // Usa navigate para redirecionar para a página de login após o logout
 };
 
 
@@ -152,6 +158,7 @@ export const Form: React.FC<{ children: React.ReactNode; method: string; classNa
   const { setState: setNavigationState, setFormData: setNavigationFormData } = useNavigation();
   const { setActionData } = useActionData();
   const { setIsAuthenticated } = useAuth(); // Obter setIsAuthenticated do contexto
+  const navigate = useNavigate(); // Importar useNavigate aqui para usar no Form
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -172,7 +179,7 @@ export const Form: React.FC<{ children: React.ReactNode; method: string; classNa
         const location = result.headers.get("Location") || "/dashboard";
         console.log("Login bem-sucedido! Redirecionando para:", location);
         setIsAuthenticated(true); // Atualiza o estado de autenticação no contexto
-        window.location.href = location; // Tenta o redirecionamento
+        navigate(location); // Usa navigate para redirecionamento
       } else {
         // Se for um erro, define os dados da ação para exibir a mensagem de erro
         setActionData(result);
