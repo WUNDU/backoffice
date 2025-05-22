@@ -1,4 +1,4 @@
-import type { User } from "~/types/user";
+import { User } from "~/types/auth";
 
 /**
  * Autentica um usuário com base no email e senha fornecidos

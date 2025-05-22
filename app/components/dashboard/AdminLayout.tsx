@@ -4,7 +4,6 @@ import {
   Home,
   Wallet,
   BarChart3,
-  Settings,
   LogOut,
   Menu,
   X,
@@ -13,7 +12,6 @@ import {
   ChevronDown,
   DollarSign
 } from 'lucide-react';
-// import { SidebarLink } from './SidebarLink'; // No need to import itself
 import { DashboardLayoutProps, MenuItem } from '~/types/types';
 import { SidebarLink } from './SidebarLink';
 
@@ -46,7 +44,6 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
         { to: '/dashboard/transaction', label: 'Transações', isActive: location.pathname === '/dashboard/transaction' },
         { to: '/dashboard/receipt', label: 'Receitas', isActive: location.pathname === '/dashboard/receipt' },
         { to: '/dashboard/expense', label: 'Despesas', isActive: location.pathname === '/dashboard/expense' },
-        // Added linking to bank/card as a conceptual sub-feature under settings/integrations
       ]
     },
     {
@@ -54,17 +51,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       icon: BarChart3,
       label: 'Relatórios e Análises'
     },
-    {
-      to: '#', // Parent link for settings with submenus
-      icon: Settings,
-      label: 'Configurações',
-      submenuKey: 'settings',
-      submenuItems: [
-        { to: '/dashboard/configuracoes/aplicacao', label: 'Configurações da Aplicação', isActive: location.pathname === '/dashboard/configuracoes/aplicacao' },
-        { to: '/dashboard/configuracoes/integracoes', label: 'Integrações (Contas/Cartões)', isActive: location.pathname === '/dashboard/configuracoes/integracoes' }, // Specific for linking
-        { to: '/dashboard/configuracoes/permissoes', label: 'Permissões', isActive: location.pathname === '/dashboard/configuracoes/permissoes' }
-      ]
-    }
+    // The 'Configurações' (Settings) menu item has been removed as requested.
   ];
 
   return (
@@ -159,7 +146,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                 {location.pathname === '/admin' && 'Painel Principal - Visão Geral'}
                 {location.pathname.startsWith('/admin/financas') && 'Gestão Financeira'}
                 {location.pathname === '/admin/relatorios' && 'Relatórios e Análises'}
-                {location.pathname.startsWith('/admin/configuracoes') && 'Configurações'}
+                {/* Removed dynamic title for 'Configurações' */}
               </h1>
             </div>
 
@@ -191,9 +178,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                     <Link to="/admin/perfil" className="block px-4 py-2 text-sm text-dark hover:bg-gray-100"> {/* Using dark color */}
                       Meu Perfil
                     </Link>
-                    <Link to="/admin/configuracoes" className="block px-4 py-2 text-sm text-dark hover:bg-gray-100"> {/* Using dark color */}
-                      Configurações
-                    </Link>
+                    {/* Removed link to /admin/configuracoes from user menu */}
                     <div className="border-t border-gray-200 my-1"></div>
                     <Link to="/logout" className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
                       Encerrar Sessão

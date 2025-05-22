@@ -49,8 +49,7 @@ const GeoDistributionBar: React.FC<GeoDistributionBarProps> = ({ region, totalUs
       const currentWidth = Math.min(progress, 1) * targetWidth;
       setAnimatedWidth(currentWidth);
 
-      console.log(`GeoDistributionBar - Região: ${region.region}, Usuários: ${region.users}, Total Usuários: ${totalUsers}, Largura Alvo: ${targetWidth.toFixed(2)}%, Largura Atual: ${currentWidth.toFixed(2)}%`); // Debug log detalhado
-
+  
       if (progress < 1) {
         animationFrameId = requestAnimationFrame(animateBar);
       }

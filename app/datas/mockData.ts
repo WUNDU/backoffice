@@ -346,3 +346,33 @@ export const topIncomeSourcesReport: TransactionCategoryData[] = [
   { name: 'Aluguel', value: 2000000, color: '#10b981' },
 ];
 
+// New mock data for application settings
+export interface ApplicationSettings {
+  appName: string;
+  defaultCurrency: string;
+  defaultLanguage: 'pt-AO' | 'en-US';
+  enableUserRegistration: boolean;
+  requireAdminApprovalForNewUsers: boolean;
+  enableGlobalNotifications: boolean;
+  maintenanceMode: boolean;
+  maintenanceMessage: string;
+  dataRetentionDays: number;
+  enableBankIntegration: boolean;
+  enableBudgetingFeature: boolean;
+  enableDebtManagementFeature: boolean;
+}
+
+export const appSettings: ApplicationSettings = {
+  appName: 'Finanças Pessoais App',
+  defaultCurrency: 'AOA',
+  defaultLanguage: 'pt-AO',
+  enableUserRegistration: true,
+  requireAdminApprovalForNewUsers: false,
+  enableGlobalNotifications: true,
+  maintenanceMode: false,
+  maintenanceMessage: 'O aplicativo está em manutenção. Voltaremos em breve!',
+  dataRetentionDays: 365 * 5, // 5 years
+  enableBankIntegration: true,
+  enableBudgetingFeature: true,
+  enableDebtManagementFeature: false,
+};
