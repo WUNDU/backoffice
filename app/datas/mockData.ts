@@ -400,3 +400,18 @@ export const securityMetricsData = [
   { name: 'Incidentes Resolvidos', value: 45, color: '#00216b' }, // primary
   { name: 'Vulnerabilidades', value: 12, color: '#ffd400' }, // accent
 ];
+
+export const mockRoles = [
+  { id: 'admin', name: 'Administrador', description: 'Acesso total ao sistema.', permissions: ['all'] },
+  { id: 'manager', name: 'Gestor', description: 'Gerencia transações e relatórios.', permissions: ['transactions:read', 'transactions:write', 'reports:read'] },
+  { id: 'analyst', name: 'Analista', description: 'Apenas visualiza relatórios e dados.', permissions: ['reports:read', 'data:read'] },
+  { id: 'support', name: 'Suporte', description: 'Acessa tickets de suporte e logs.', permissions: ['support:read', 'logs:read'] },
+];
+
+export const mockUsers = [
+  { id: 'user-1', name: 'João Silva', email: 'joao.s@example.com', roleId: 'admin', status: 'active' },
+  { id: 'user-2', name: 'Maria Santos', email: 'maria.s@example.com', roleId: 'manager', status: 'active' },
+  { id: 'user-3', name: 'Pedro Costa', email: 'pedro.c@example.com', roleId: 'analyst', status: 'active' },
+  { id: 'user-4', name: 'Ana Pereira', email: 'ana.p@example.com', roleId: 'support', status: 'active' },
+  { id: 'user-5', name: 'Carlos Lima', email: 'carlos.l@example.com', roleId: 'manager', status: 'inactive' },
+];

@@ -11,7 +11,8 @@ import {
   User,
   ChevronDown,
   DollarSign,
-  ShieldAlert // Importar o ícone ShieldAlert
+  ShieldAlert,
+  Users as UsersIcon // Renomeado para evitar conflito com o componente Users
 } from 'lucide-react';
 import { DashboardLayoutProps, MenuItem } from '~/types/types';
 import { SidebarLink } from './SidebarLink';
@@ -53,9 +54,14 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       label: 'Relatórios e Análises'
     },
     {
-      to: '/dashboard/security', // Nova rota para o Painel de Segurança
-      icon: ShieldAlert, // Ícone para o Painel de Segurança
+      to: '/dashboard/security',
+      icon: ShieldAlert,
       label: 'Painel de Segurança'
+    },
+    {
+      to: '/dashboard/access-management', // Nova rota para Gerenciamento de Acesso
+      icon: UsersIcon, // Ícone para Gerenciamento de Acesso
+      label: 'Gerenciamento de Acesso'
     },
     // The 'Configurações' (Settings) menu item has been removed as requested.
   ];
@@ -154,7 +160,8 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                 {location.pathname.startsWith('/dashboard/receipt') && 'Gestão Financeira - Receitas'}
                 {location.pathname.startsWith('/dashboard/expense') && 'Gestão Financeira - Despesas'}
                 {location.pathname === '/dashboard/reports' && 'Relatórios e Análises'}
-                {location.pathname === '/dashboard/security' && 'Painel de Segurança'} {/* Novo título */}
+                {location.pathname === '/dashboard/security' && 'Painel de Segurança'}
+                {location.pathname === '/dashboard/access-management' && 'Gerenciamento de Acesso'} {/* Novo título */}
               </h1>
             </div>
 
