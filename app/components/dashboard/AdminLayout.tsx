@@ -4,7 +4,6 @@ import {
   Home,
   Wallet,
   BarChart3,
-  PieChart,
   Settings,
   LogOut,
   Menu,
@@ -14,8 +13,9 @@ import {
   ChevronDown,
   DollarSign
 } from 'lucide-react';
-import { SidebarLink } from './SidebarLink';
+// import { SidebarLink } from './SidebarLink'; // No need to import itself
 import { DashboardLayoutProps, MenuItem } from '~/types/types';
+import { SidebarLink } from './SidebarLink';
 
 export function AdminLayout({ children }: DashboardLayoutProps) {
   const location = useLocation();
@@ -30,6 +30,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
     }));
   };
 
+  // Simplified menu items based on MVP and PDF structure
   const menuItems: MenuItem[] = [
     {
       to: '/admin',
@@ -37,38 +38,40 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       label: 'Painel Principal'
     },
     {
-      to: '#',
+      to: '#', // Parent link for financial management with submenus
       icon: Wallet,
       label: 'Gestão Financeira',
       submenuKey: 'finance',
       submenuItems: [
+        { to: '/admin/financas/transacoes', label: 'Transações', isActive: location.pathname === '/admin/financas/transacoes' },
         { to: '/admin/financas/receitas', label: 'Receitas', isActive: location.pathname === '/admin/financas/receitas' },
         { to: '/admin/financas/despesas', label: 'Despesas', isActive: location.pathname === '/admin/financas/despesas' },
-        { to: '/admin/financas/transferencias', label: 'Transferências', isActive: location.pathname === '/admin/financas/transferencias' }
+        // Added linking to bank/card as a conceptual sub-feature under settings/integrations
       ]
     },
     {
       to: '/admin/relatorios',
       icon: BarChart3,
-      label: 'Relatórios'
+      label: 'Relatórios e Análises'
     },
     {
-      to: '/admin/orcamentos',
-      icon: PieChart,
-      label: 'Orçamentos'
-    },
-    {
-      to: '/admin/configuracoes',
+      to: '#', // Parent link for settings with submenus
       icon: Settings,
-      label: 'Configurações'
+      label: 'Configurações',
+      submenuKey: 'settings',
+      submenuItems: [
+        { to: '/admin/configuracoes/aplicacao', label: 'Configurações da Aplicação', isActive: location.pathname === '/admin/configuracoes/aplicacao' },
+        { to: '/admin/configuracoes/integracoes', label: 'Integrações (Contas/Cartões)', isActive: location.pathname === '/admin/configuracoes/integracoes' }, // Specific for linking
+        { to: '/admin/configuracoes/permissoes', label: 'Permissões', isActive: location.pathname === '/admin/configuracoes/permissoes' }
+      ]
     }
   ];
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-light font-inter"> {/* Changed bg-gray-50 to bg-light */}
       {/* Sidebar overlay for mobile */}
       <div className={`
-        fixed inset-0 z-40 md:hidden bg-black bg-opacity-50 transition-opacity duration-300
+        fixed inset-0 z-40 md:hidden bg-dark bg-opacity-50 transition-opacity duration-300
         ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
       `}
         onClick={() => setSidebarOpen(false)}
@@ -83,7 +86,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
 
       {/* Sidebar */}
       <aside className={`
-        fixed top-0 left-0 z-50 h-full w-64 bg-white border-r border-gray-200 
+        fixed top-0 left-0 z-50 h-full w-64 bg-white border-r border-gray-200
         transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:z-auto
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
@@ -91,11 +94,11 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
           {/* Logo */}
           <div className="flex items-center justify-between px-6 h-16 border-b border-gray-200">
             <div className="flex items-center">
-              <div className="rounded-lg bg-primary p-1">
+              <div className="rounded-lg bg-primary p-1"> {/* Using primary color */}
                 <DollarSign size={24} className="text-white" />
               </div>
-              <span className="ml-2 font-bold font-poppins text-xl">
-                Admin<span className="text-accent">Panel</span>
+              <span className="ml-2 font-bold text-xl text-dark"> {/* Using dark color */}
+                Admin<span className="text-accent">Panel</span> {/* Using accent color */}
               </span>
             </div>
             <button
@@ -116,7 +119,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                 label={item.label}
                 isActive={
                   item.submenuItems
-                    ? item.submenuItems.some(subItem => subItem.isActive)
+                    ? item.submenuItems.some(subItem => location.pathname.startsWith(subItem.to))
                     : location.pathname === item.to
                 }
                 isSubmenuOpen={item.submenuKey ? openSubmenus[item.submenuKey] : false}
@@ -133,7 +136,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
               className="flex items-center px-4 py-3 text-red-600 rounded-lg hover:bg-red-50 transition-colors duration-200"
             >
               <LogOut size={20} />
-              <span className="ml-3 font-medium">Encerrar Sessão</span>
+              <span className="ml-3 font-medium text-base">Encerrar Sessão</span> {/* Adjusted font size */}
             </Link>
           </div>
         </div>
@@ -151,12 +154,12 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
               >
                 <Menu size={24} />
               </button>
-              <h1 className="hidden md:block ml-4 text-xl font-semibold text-gray-800">
-                {location.pathname === '/admin' && 'Visão Geral'}
-                {location.pathname === '/admin/relatorios' && 'Relatórios'}
-                {location.pathname.includes('/admin/financas') && 'Gestão Financeira'}
-                {location.pathname === '/admin/orcamentos' && 'Orçamentos'}
-                {location.pathname === '/admin/configuracoes' && 'Configurações'}
+              <h1 className="hidden md:block ml-4 text-xl font-semibold text-dark"> {/* Using dark color */}
+                {/* Dynamic title based on current path */}
+                {location.pathname === '/admin' && 'Painel Principal - Visão Geral'}
+                {location.pathname.startsWith('/admin/financas') && 'Gestão Financeira'}
+                {location.pathname === '/admin/relatorios' && 'Relatórios e Análises'}
+                {location.pathname.startsWith('/admin/configuracoes') && 'Configurações'}
               </h1>
             </div>
 
@@ -175,20 +178,20 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                   className="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-100"
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
                 >
-                  <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center"> {/* Using secondary color */}
                     <User size={16} className="text-white" />
                   </div>
-                  <span className="hidden md:inline-block text-sm font-medium text-gray-700">Administrador</span>
+                  <span className="hidden md:inline-block text-sm font-medium text-dark">Administrador</span> {/* Using dark color */}
                   <ChevronDown size={16} className={`hidden md:block transition-transform duration-200 ${userMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Dropdown menu */}
                 {userMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 py-2 bg-white rounded-md shadow-lg z-50 border border-gray-200">
-                    <Link to="/admin/perfil" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <Link to="/admin/perfil" className="block px-4 py-2 text-sm text-dark hover:bg-gray-100"> {/* Using dark color */}
                       Meu Perfil
                     </Link>
-                    <Link to="/admin/configuracoes" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <Link to="/admin/configuracoes" className="block px-4 py-2 text-sm text-dark hover:bg-gray-100"> {/* Using dark color */}
                       Configurações
                     </Link>
                     <div className="border-t border-gray-200 my-1"></div>
@@ -203,7 +206,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-auto p-4 md:p-6 bg-gray-50">
+        <main className="flex-1 overflow-auto p-4 md:p-6 bg-light"> {/* Changed bg-gray-50 to bg-light */}
           {children}
         </main>
       </div>

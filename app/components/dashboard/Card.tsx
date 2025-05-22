@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { CardProps } from '~/types/types';
 
@@ -12,9 +12,53 @@ export const Card: React.FC<CardProps> = ({
   isCurrency = true
 }) => {
   const Icon = icon;
+  const [displayedValue, setDisplayedValue] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    if (value === 0) {
+      setDisplayedValue(0);
+      return;
+    }
+
+    setIsAnimating(true);
+    const endValue = value;
+    const duration = 1500; // 1.5 seconds animation
+    const startTime = Date.now();
+
+    const animateCount = () => {
+      const currentTime = Date.now();
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+
+      // Use easing function for smoother animation
+      const easedProgress = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+
+      const currentValue = Math.floor(easedProgress * endValue);
+      setDisplayedValue(currentValue);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateCount);
+      } else {
+        setDisplayedValue(endValue);
+        setIsAnimating(false);
+      }
+    };
+
+    // Start animation after a small delay
+    const timer = setTimeout(() => {
+      requestAnimationFrame(animateCount);
+    }, 100);
+
+    console.log(`Card Animation - Title: ${title}, Value: ${value}, Starting animation...`);
+
+    return () => {
+      clearTimeout(timer);
+      setIsAnimating(false);
+    };
+  }, [value, title]);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md">
+    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md animate-fadeInUp">
       <div className="flex justify-between items-start mb-4">
         <div className={`p-2 rounded-lg ${color === 'primary' ? 'bg-primary/10 text-primary' :
           color === 'secondary' ? 'bg-secondary/10 text-secondary' :
@@ -31,10 +75,10 @@ export const Card: React.FC<CardProps> = ({
         )}
       </div>
       <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-      <p className="text-2xl font-bold mt-1 text-gray-800">
+      <p className={`text-2xl font-bold mt-1 text-dark transition-all duration-300 ${isAnimating ? 'text-primary' : ''}`}>
         {isCurrency
-          ? new Intl.NumberFormat('pt-AO', { style: 'currency', currency: 'AOA' }).format(value)
-          : value.toLocaleString()}
+          ? new Intl.NumberFormat('pt-AO', { style: 'currency', currency: 'AOA' }).format(displayedValue)
+          : displayedValue.toLocaleString()}
       </p>
     </div>
   );
