@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 import { Form, useActionData, useAuth, useNavigation } from "~/hook/authMock";
 import { AuthError } from "~/types/types";
-import { Logo } from "./Logo";
-import { InputField } from "./InputField";
-import { LoginButton } from "./LoginButton";
+import { Logo } from "../components/login/Logo";
+import { InputField } from "../components/login/InputField";
+import { LoginButton } from "../components/login/LoginButton";
 
 
 export default function LoginScreen() {
