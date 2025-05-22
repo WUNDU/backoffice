@@ -51,9 +51,9 @@ export const redirect = (path: string) => {
 /**
  * MOCK: Simula a função `action` do Remix.
  * Processa os dados do formulário e tenta autenticar o usuário.
- * Agora retorna { success: true } em caso de sucesso, ou { error: "..." } em caso de falha.
+ * Agora retorna um Response em caso de sucesso, ou AuthError em caso de falha.
  */
-export async function mockAction(formData: FormData): Promise<AuthError | { success: boolean }> {
+export async function mockAction(formData: FormData): Promise<AuthError | Response> {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
 
@@ -66,8 +66,8 @@ export async function mockAction(formData: FormData): Promise<AuthError | { succ
     if (!user) {
       return { error: "Credenciais inválidas" };
     }
-    // Em vez de redirecionar, retorna um objeto de sucesso para o componente React
-    return { success: true };
+    // Retorna um Response para simular o redirecionamento
+    return redirect("/dashboard");
   } catch (error) {
     return { error: "Erro ao fazer login. Tente novamente." };
   }
@@ -88,7 +88,7 @@ export const Form: React.FC<{ children: React.ReactNode; method: string; classNa
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Limpar erros ou mensagens de sucesso anteriores
+    // Limpar erros anteriores
     setActionData(undefined);
 
     const formData = new FormData(event.currentTarget);
@@ -99,12 +99,15 @@ export const Form: React.FC<{ children: React.ReactNode; method: string; classNa
     try {
       const result = await mockAction(formData);
 
-      if ('success' in result && result.success) {
-        // Se for sucesso, define actionData com a propriedade success
-        setActionData({ success: true });
-      } else if ('error' in result) {
-        // Se for erro, define actionData com a propriedade error
-        setActionData({ error: result.error });
+      if (result instanceof Response) {
+        // Se for um Response, tenta o redirecionamento
+        const location = result.headers.get("Location") || "/dashboard";
+        console.log("Login bem-sucedido! Redirecionando para:", location);
+        window.location.href = location; // Tenta o redirecionamento
+      } else {
+        // Se for um erro, define os dados da ação para exibir a mensagem de erro
+        setActionData(result);
+        console.log("Erro de login:", result);
       }
     } catch (error) {
       setActionData({ error: "Erro inesperado na submissão do formulário." });
