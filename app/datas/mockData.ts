@@ -310,3 +310,69 @@ export const detailedExpenses: Transaction[] = [
 export const expenseCategoryData: TransactionCategoryData[] = calculateTransactionCategories(
   detailedExpenses.filter(t => t.type === 'expense')
 );
+
+// New mock data for annual financial performance (admin view)
+export const annualFinancialPerformance: ChartData[] = [
+  { month: 'Jan', receita: 3200000, despesa: 2600000, net: 600000 },
+  { month: 'Fev', receita: 3400000, despesa: 2900000, net: 500000 },
+  { month: 'Mar', receita: 3100000, despesa: 2300000, net: 800000 },
+  { month: 'Abr', receita: 3500000, despesa: 2500000, net: 1000000 },
+  { month: 'Mai', receita: 3800000, despesa: 2800000, net: 1000000 },
+  { month: 'Jun', receita: 4200000, despesa: 3100000, net: 1100000 },
+  { month: 'Jul', receita: 4100000, despesa: 2950000, net: 1150000 },
+  { month: 'Ago', receita: 4300000, despesa: 3200000, net: 1100000 },
+  { month: 'Set', receita: 4000000, despesa: 3000000, net: 1000000 },
+  { month: 'Out', receita: 4500000, despesa: 3300000, net: 1200000 },
+  { month: 'Nov', receita: 4700000, despesa: 3500000, net: 1200000 },
+  { month: 'Dez', receita: 5000000, despesa: 3800000, net: 1200000 },
+];
+
+// Aggregated data for top categories/sources across all users (for admin reports)
+export const topExpenseCategoriesReport: TransactionCategoryData[] = [
+  { name: 'Moradia', value: 3500000, color: '#ef4444' },
+  { name: 'Alimentação', value: 2500000, color: '#f97316' },
+  { name: 'Contas de Casa', value: 1800000, color: '#eab308' },
+  { name: 'Transporte', value: 1500000, color: '#8b5cf6' },
+  { name: 'Lazer', value: 1000000, color: '#ec4899' },
+  { name: 'Saúde', value: 800000, color: '#06b6d4' },
+  { name: 'Educação', value: 600000, color: '#3b82f6' },
+];
+
+export const topIncomeSourcesReport: TransactionCategoryData[] = [
+  { name: 'Salário', value: 15000000, color: '#22c55e' },
+  { name: 'Freelance', value: 7000000, color: '#3b82f6' },
+  { name: 'Investimento', value: 4000000, color: '#a855f7' },
+  { name: 'Vendas', value: 2500000, color: '#f97316' },
+  { name: 'Aluguel', value: 2000000, color: '#10b981' },
+];
+
+// New mock data for application settings
+export interface ApplicationSettings {
+  appName: string;
+  defaultCurrency: string;
+  defaultLanguage: 'pt-AO' | 'en-US';
+  enableUserRegistration: boolean;
+  requireAdminApprovalForNewUsers: boolean;
+  enableGlobalNotifications: boolean;
+  maintenanceMode: boolean;
+  maintenanceMessage: string;
+  dataRetentionDays: number;
+  enableBankIntegration: boolean;
+  enableBudgetingFeature: boolean;
+  enableDebtManagementFeature: boolean;
+}
+
+export const appSettings: ApplicationSettings = {
+  appName: 'Finanças Pessoais App',
+  defaultCurrency: 'AOA',
+  defaultLanguage: 'pt-AO',
+  enableUserRegistration: true,
+  requireAdminApprovalForNewUsers: false,
+  enableGlobalNotifications: true,
+  maintenanceMode: false,
+  maintenanceMessage: 'O aplicativo está em manutenção. Voltaremos em breve!',
+  dataRetentionDays: 365 * 5, // 5 years
+  enableBankIntegration: true,
+  enableBudgetingFeature: true,
+  enableDebtManagementFeature: false,
+};

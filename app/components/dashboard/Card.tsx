@@ -49,8 +49,6 @@ export const Card: React.FC<CardProps> = ({
       requestAnimationFrame(animateCount);
     }, 100);
 
-    console.log(`Card Animation - Title: ${title}, Value: ${value}, Starting animation...`);
-
     return () => {
       clearTimeout(timer);
       setIsAnimating(false);

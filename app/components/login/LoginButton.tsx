@@ -7,18 +7,20 @@ export function LoginButton({ isSubmitting }: LoginButtonProps) {
     <button
       type="submit"
       disabled={isSubmitting}
-      className={`w-full py-3 px-4 flex justify-center items-center
-                  text-white font-medium rounded-md shadow-lg  
-                  transition-transform duration-300 ease-in-out
-                  font-poppins text-base transform hover:scale-105
+      className={`w-full py-3 px-4 flex justify-center items-center gap-2
+                  text-white font-semibold rounded-lg shadow-lg
+                  transition-all duration-300 ease-in-out
+                  font-poppins text-lg transform
                   ${isSubmitting
-          ? "bg-secondary/70 cursor-not-allowed"
-          : "bg-secondary hover:bg-primary"}`}
+          ? "bg-gradient-to-r from-secondary/70 to-primary/70 cursor-not-allowed opacity-80" // Cores principais com opacidade
+          : "bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary hover:scale-105 active:scale-95" // Cores principais para normal e hover
+        }
+                  focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50`}
     >
       {isSubmitting ? (
         <>
           <svg
-            className="animate-spin -ml-1 mr-2 h-5 w-5 text-white"
+            className="animate-spin h-5 w-5 text-white"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

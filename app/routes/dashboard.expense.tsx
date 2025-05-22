@@ -3,7 +3,6 @@ import {
   TrendingDown,
   Filter,
   Search,
-  CalendarDays,
   ChevronDown,
   List,
   Tag,
@@ -245,7 +244,6 @@ const ExpensesPage: React.FC = () => {
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
                 />
-                <CalendarDays size={18} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
               </div>
               <div className="relative flex-1">
                 <input
@@ -254,7 +252,6 @@ const ExpensesPage: React.FC = () => {
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
                 />
-                <CalendarDays size={18} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
               </div>
             </div>
           </div>
