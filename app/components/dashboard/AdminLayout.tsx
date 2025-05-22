@@ -33,7 +33,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
   // Simplified menu items based on MVP and PDF structure
   const menuItems: MenuItem[] = [
     {
-      to: '/admin',
+      to: '/dashboard',
       icon: Home,
       label: 'Painel Principal'
     },
@@ -43,14 +43,14 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       label: 'Gestão Financeira',
       submenuKey: 'finance',
       submenuItems: [
-        { to: '/admin/financas/transacoes', label: 'Transações', isActive: location.pathname === '/admin/financas/transacoes' },
-        { to: '/admin/financas/receitas', label: 'Receitas', isActive: location.pathname === '/admin/financas/receitas' },
-        { to: '/admin/financas/despesas', label: 'Despesas', isActive: location.pathname === '/admin/financas/despesas' },
+        { to: '/dashboard/financas/transacoes', label: 'Transações', isActive: location.pathname === '/dashboard/financas/transacoes' },
+        { to: '/dashboard/financas/receitas', label: 'Receitas', isActive: location.pathname === '/dashboard/financas/receitas' },
+        { to: '/dashboard/financas/despesas', label: 'Despesas', isActive: location.pathname === '/dashboard/financas/despesas' },
         // Added linking to bank/card as a conceptual sub-feature under settings/integrations
       ]
     },
     {
-      to: '/admin/relatorios',
+      to: '/dashboard/relatorios',
       icon: BarChart3,
       label: 'Relatórios e Análises'
     },
@@ -60,9 +60,9 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       label: 'Configurações',
       submenuKey: 'settings',
       submenuItems: [
-        { to: '/admin/configuracoes/aplicacao', label: 'Configurações da Aplicação', isActive: location.pathname === '/admin/configuracoes/aplicacao' },
-        { to: '/admin/configuracoes/integracoes', label: 'Integrações (Contas/Cartões)', isActive: location.pathname === '/admin/configuracoes/integracoes' }, // Specific for linking
-        { to: '/admin/configuracoes/permissoes', label: 'Permissões', isActive: location.pathname === '/admin/configuracoes/permissoes' }
+        { to: '/dashboard/configuracoes/aplicacao', label: 'Configurações da Aplicação', isActive: location.pathname === '/dashboard/configuracoes/aplicacao' },
+        { to: '/dashboard/configuracoes/integracoes', label: 'Integrações (Contas/Cartões)', isActive: location.pathname === '/dashboard/configuracoes/integracoes' }, // Specific for linking
+        { to: '/dashboard/configuracoes/permissoes', label: 'Permissões', isActive: location.pathname === '/dashboard/configuracoes/permissoes' }
       ]
     }
   ];
