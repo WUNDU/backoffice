@@ -1,5 +1,6 @@
 export interface AuthError {
   error?: string;
+  success?: boolean; // Adicionado para permitir a propriedade 'success'
 }
 
 export interface LoginFormData {
@@ -25,3 +26,5 @@ export interface User {
 export interface UserWithPermissions extends User {
   permissions: string[];
 }
+
+export type ActionData = { error: string } | { success: boolean };
