@@ -16,7 +16,7 @@ export function Logo({ small = false }: LogoProps) {
         />
       </div>
       <span className={`ml-2 font-bold font-poppins ${small ? 'text-xl text-dark' : 'text-2xl text-white'}`}>
-        Finance<span className="text-accent">Tracker</span>
+        One<span className="text-accent">Wundu</span>
       </span>
     </div>
   );
