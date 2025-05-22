@@ -25,16 +25,16 @@ export function InputField({
 
   return (
     <div className="relative">
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
+      <label htmlFor={id} className="block text-sm font-medium text-dark mb-1 font-inter">
         {label}
       </label>
       <div
         className={`p-[2px] rounded-lg transition-all duration-300 ease-in-out
                     ${hasError
-            ? "bg-red-500 animate-pulse"
-            : "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+            ? "bg-tertiary animate-shake" // Usando tertiary para erro e shake para animação
+            : "bg-gradient-to-r from-primary via-secondary to-accent" // Usando suas cores principais
           }
-                    ${isFocused && !hasError ? "shadow-lg shadow-purple-500/50" : ""}`}
+                    ${isFocused && !hasError ? "shadow-lg shadow-secondary/50" : ""}`}
       >
         <input
           id={id}
@@ -46,17 +46,17 @@ export function InputField({
           onBlur={() => setIsFocused(false)}
           className={`w-full px-4 py-3 border-none rounded-lg shadow-sm
                       focus:ring-0 focus:outline-none
-                      placeholder-gray-400 text-base
+                      placeholder-gray-400 font-inter text-base
                       transition-all duration-300 ease-in-out
-                      bg-white text-gray-900
+                      bg-light text-dark
                       ${hasError
-              ? "ring-2 ring-red-500 bg-red-50"
+              ? "ring-2 ring-tertiary" // Usando tertiary para o anel de erro
               : ""
             }`}
         />
       </div>
       {hasError && errorMessage && (
-        <p className="mt-2 text-sm text-red-600 animate-bounce">
+        <p className="mt-2 text-sm text-tertiary animate-fade-in"> {/* Usando tertiary para texto de erro e fade-in */}
           {errorMessage}
         </p>
       )}

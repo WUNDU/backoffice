@@ -10,12 +10,12 @@ export function LoginButton({ isSubmitting }: LoginButtonProps) {
       className={`w-full py-3 px-4 flex justify-center items-center gap-2
                   text-white font-semibold rounded-lg shadow-lg
                   transition-all duration-300 ease-in-out
-                  text-lg transform
+                  font-poppins text-lg transform
                   ${isSubmitting
-          ? "bg-gray-400 cursor-not-allowed opacity-80"
-          : "bg-gradient-to-r from-purple-500 to-blue-500 hover:from-blue-500 hover:to-purple-500 hover:scale-105 active:scale-95"
+          ? "bg-gradient-to-r from-secondary/70 to-primary/70 cursor-not-allowed opacity-80" // Cores principais com opacidade
+          : "bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary hover:scale-105 active:scale-95" // Cores principais para normal e hover
         }
-                  focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50`}
+                  focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50`}
     >
       {isSubmitting ? (
         <>
