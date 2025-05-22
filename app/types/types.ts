@@ -1,3 +1,4 @@
+// types.ts
 import { LucideIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 
@@ -48,6 +49,7 @@ export interface ChartCardProps {
   chartData: unknown[];
   dataKey: string | string[];
   color: string;
+  isCurrencyChart?: boolean; // Adicionado: Propriedade para controlar a exibição de moeda
 }
 
 export interface ChartData {
@@ -124,4 +126,34 @@ export interface Transaction {
 // New interface for ReceiptItemProps
 export interface ReceiptItemProps {
   receipt: Transaction; // Reusing Transaction type for receipts, but focusing on income
+}
+
+// Auth types (mantidos do contexto anterior)
+export interface AuthError {
+  error?: string;
+  success?: boolean;
+}
+
+export interface LoginFormData {
+  email: string;
+  password: string;
+  rememberMe?: boolean;
+}
+
+export interface Session {
+  id: string;
+  userId: string;
+  expiresAt: Date;
+  createdAt: Date;
+}
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: "admin" | "manager" | "user";
+}
+
+export interface UserWithPermissions extends User {
+  permissions: string[];
 }

@@ -10,7 +10,8 @@ import {
   Bell,
   User,
   ChevronDown,
-  DollarSign
+  DollarSign,
+  ShieldAlert // Importar o ícone ShieldAlert
 } from 'lucide-react';
 import { DashboardLayoutProps, MenuItem } from '~/types/types';
 import { SidebarLink } from './SidebarLink';
@@ -50,6 +51,11 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
       to: '/dashboard/reports',
       icon: BarChart3,
       label: 'Relatórios e Análises'
+    },
+    {
+      to: '/dashboard/security', // Nova rota para o Painel de Segurança
+      icon: ShieldAlert, // Ícone para o Painel de Segurança
+      label: 'Painel de Segurança'
     },
     // The 'Configurações' (Settings) menu item has been removed as requested.
   ];
@@ -107,7 +113,7 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
                 isActive={
                   item.submenuItems
                     ? item.submenuItems.some(subItem => location.pathname.startsWith(subItem.to))
-                    : location.pathname === item.to
+                    : location.pathname === item.to || (item.to === '/dashboard' && location.pathname === '/') // Handle root dashboard route
                 }
                 isSubmenuOpen={item.submenuKey ? openSubmenus[item.submenuKey] : false}
                 toggleSubmenu={() => item.submenuKey && toggleSubmenu(item.submenuKey)}
@@ -143,10 +149,12 @@ export function AdminLayout({ children }: DashboardLayoutProps) {
               </button>
               <h1 className="hidden md:block ml-4 text-xl font-semibold text-dark"> {/* Using dark color */}
                 {/* Dynamic title based on current path */}
-                {location.pathname === '/admin' && 'Painel Principal - Visão Geral'}
-                {location.pathname.startsWith('/admin/financas') && 'Gestão Financeira'}
-                {location.pathname === '/admin/relatorios' && 'Relatórios e Análises'}
-                {/* Removed dynamic title for 'Configurações' */}
+                {location.pathname === '/dashboard' && 'Painel Principal - Visão Geral'}
+                {location.pathname.startsWith('/dashboard/transaction') && 'Gestão Financeira - Transações'}
+                {location.pathname.startsWith('/dashboard/receipt') && 'Gestão Financeira - Receitas'}
+                {location.pathname.startsWith('/dashboard/expense') && 'Gestão Financeira - Despesas'}
+                {location.pathname === '/dashboard/reports' && 'Relatórios e Análises'}
+                {location.pathname === '/dashboard/security' && 'Painel de Segurança'} {/* Novo título */}
               </h1>
             </div>
 
