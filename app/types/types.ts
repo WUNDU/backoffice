@@ -58,6 +58,18 @@ export interface ChartData {
   users?: number;
 }
 
+// New type for Pie Chart data
+export interface PieChartCardProps {
+  title: string;
+  chartData: TransactionCategoryData[];
+}
+
+export interface TransactionCategoryData {
+  name: string;
+  value: number;
+  color: string; // Color for the segment in the pie chart
+}
+
 export interface BillItemProps {
   bill: Bill;
 }
