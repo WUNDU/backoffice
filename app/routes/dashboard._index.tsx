@@ -133,7 +133,7 @@ export default function AdminDashboard() {
             <h3 className="font-medium text-red-700">Alertas de Segurança Ativos</h3>
             <p className="text-red-600 text-sm">
               Você tem {kpiData.securityAlerts} {kpiData.securityAlerts === 1 ? 'alerta' : 'alertas'} de segurança que {kpiData.securityAlerts === 1 ? 'requer' : 'requerem'} atenção.
-              <Link to="/admin/seguranca/alertas" className="ml-2 underline text-secondary hover:text-primary transition-colors duration-200">Verificar</Link>
+              <Link to="/dashboard/security" className="ml-2 underline text-secondary hover:text-primary transition-colors duration-200">Verificar</Link>
             </p>
           </div>
         </div>
@@ -300,7 +300,7 @@ export default function AdminDashboard() {
           <div className="p-6 border-b border-gray-100">
             <div className="flex justify-between items-center">
               <h3 className="font-medium text-dark">Alertas de Segurança</h3>
-              <Link to="/admin/seguranca/alertas" className="flex items-center text-secondary text-sm hover:text-primary transition-colors duration-200">
+              <Link to="/dashboard/security" className="flex items-center text-secondary text-sm hover:text-primary transition-colors duration-200">
                 Ver todos
                 <ChevronRight size={16} className="ml-1" />
               </Link>
